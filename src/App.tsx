@@ -9,6 +9,7 @@ import Courses from './pages/Courses';
 import CourseManage from './pages/CourseManage';
 import Activity from './pages/Activity';
 import SuspiciousActivity from './pages/SuspiciousActivity';
+import Announcements from './pages/Announcements';
 import NotFound from './pages/NotFound';
 
 const queryClient = new QueryClient({
@@ -46,6 +47,7 @@ export default function App() {
                 <Route path="/users"               element={<Users />} />
                 <Route path="/courses"             element={<Courses />} />
                 <Route path="/courses/:id/manage"  element={<CourseManage />} />
+                <Route path="/announcements"       element={<Announcements />} />
                 <Route path="/activity"            element={<Activity />} />
                 <Route path="/suspicious"          element={<SuspiciousActivity />} />
               </Route>

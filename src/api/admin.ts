@@ -89,6 +89,17 @@ export interface SuspiciousUser {
   recentLogins: SuspiciousLogin[];
 }
 
+export interface AdminAnnouncement {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  targetRole: 'all' | 'student' | 'admin';
+  readBy: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
 // ── API functions ─────────────────────────────────────────────────────────────
 
 export const adminApi = {
@@ -143,4 +154,13 @@ export const adminApi = {
 
   // Suspicious
   getSuspiciousActivity: () => apiFetch<SuspiciousUser[]>('/admin/suspicious'),
+
+  // Announcements
+  getAnnouncements: () => apiFetch<AdminAnnouncement[]>('/admin/announcements'),
+  createAnnouncement: (data: { title: string; description?: string; targetRole?: string }) =>
+    apiFetch<AdminAnnouncement>('/admin/announcements', { method: 'POST', body: JSON.stringify(data) }),
+  updateAnnouncement: (id: string, data: { title?: string; description?: string; targetRole?: string }) =>
+    apiFetch<AdminAnnouncement>(`/admin/announcements/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  deleteAnnouncement: (id: string) =>
+    apiFetch<{ message: string }>(`/admin/announcements/${id}`, { method: 'DELETE' }),
 };
