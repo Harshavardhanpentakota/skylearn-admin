@@ -15,6 +15,7 @@ export interface AdminUser {
   name: string;
   email: string;
   role: 'admin' | 'student';
+  status: 'active' | 'blocked';
   avatar: string | null;
   hasGoogle: boolean;
   createdAt: string;
@@ -71,6 +72,8 @@ export interface SuspiciousLogin {
   ip: string;
   method: string;
   userAgent: string | null;
+  browser: string | null;
+  os: string | null;
   createdAt: string;
 }
 
@@ -79,8 +82,11 @@ export interface SuspiciousUser {
   name: string;
   email: string;
   role: string;
+  status: 'active' | 'blocked';
   distinctIPs: string[];
   ipCount: number;
+  deviceCount: number;
+  lastActiveIP: string;
   totalLogins: number;
   lastLogin: string;
   firstLogin: string;
@@ -115,10 +121,18 @@ export const adminApi = {
 
   // Users
   getUsers:   ()                                              => apiFetch<AdminUser[]>('/admin/users'),
-  updateUser: (id: string, data: { name?: string; role?: string }) =>
+  updateUser: (id: string, data: { name?: string; email?: string; role?: string; status?: string }) =>
     apiFetch<AdminUser>(`/admin/users/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
   deleteUser: (id: string) =>
     apiFetch<{ message: string }>(`/admin/users/${id}`, { method: 'DELETE' }),
+  blockUser: (id: string) =>
+    apiFetch<{ message: string; user: AdminUser }>(`/admin/users/block/${id}`, { method: 'POST' }),
+  unblockUser: (id: string) =>
+    apiFetch<{ message: string; user: AdminUser }>(`/admin/users/unblock/${id}`, { method: 'POST' }),
+  bulkCreateUsers: (users: { name: string; email: string; role?: string; password?: string }[]) =>
+    apiFetch<{ message: string; created: number; skipped: number; errors: { email: string; reason: string }[] }>(
+      '/admin/users/bulk', { method: 'POST', body: JSON.stringify({ users }) }
+    ),
 
   // Courses
   getCourses:   () => apiFetch<AdminCourse[]>('/admin/courses'),

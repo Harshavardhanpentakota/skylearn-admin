@@ -1,6 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
+import GlobalSearch from "./GlobalSearch";
 import { useAuth } from "@/context/AuthContext";
 import { Menu } from "lucide-react";
 
@@ -37,6 +38,12 @@ export default function Layout() {
           <span className="font-semibold text-gray-800 text-sm">
             SkyLearn Admin
           </span>
+          <div className="ml-auto"><GlobalSearch /></div>
+        </header>
+
+        {/* Desktop top bar */}
+        <header className="hidden lg:flex items-center justify-end gap-3 border-b border-gray-200 bg-white px-6 py-3 shrink-0">
+          <GlobalSearch />
         </header>
 
         <main className="flex-1 overflow-y-auto p-4 md:p-6">
