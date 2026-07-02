@@ -9,6 +9,7 @@ import Courses from './pages/Courses';
 import CourseManage from './pages/CourseManage';
 import Activity from './pages/Activity';
 import SuspiciousActivity from './pages/SuspiciousActivity';
+import LoginSessions from '@/pages/LoginSessions'; // Audit face capture logs
 import Announcements from './pages/Announcements';
 import NotFound from './pages/NotFound';
 
@@ -50,6 +51,7 @@ export default function App() {
                 <Route path="/announcements"       element={<Announcements />} />
                 <Route path="/activity"            element={<Activity />} />
                 <Route path="/suspicious"          element={<SuspiciousActivity />} />
+                <Route path="/sessions"            element={<LoginSessions />} />
               </Route>
             </Route>
             <Route path="*" element={<NotFound />} />

@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import {
-  LayoutDashboard, Users, BookOpen, Activity, ShieldAlert, LogOut, GraduationCap, Megaphone, X,
+  LayoutDashboard, Users, BookOpen, Activity, ShieldAlert, LogOut, GraduationCap, Megaphone, X, Camera,
 } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { adminApi } from '@/api/admin';
@@ -14,6 +14,7 @@ const navItems = [
   { to: '/announcements', icon: Megaphone,      label: 'Announcements' },
   { to: '/activity',     icon: Activity,        label: 'Login Activity' },
   { to: '/suspicious',   icon: ShieldAlert,     label: 'Suspicious Activity', alert: true },
+  { to: '/sessions',     icon: Camera,          label: 'Face Captures' },
 ];
 
 interface SidebarProps {
