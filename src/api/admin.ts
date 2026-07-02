@@ -58,6 +58,7 @@ export interface ActivityRecord {
   method: 'email' | 'google';
   userAgent: string | null;
   createdAt: string;
+  faceCard?: string | null;
 }
 
 export interface ActivityResponse {
